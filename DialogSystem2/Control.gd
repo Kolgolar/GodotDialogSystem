@@ -220,7 +220,7 @@ func save_dialog(path, fn):
 		return
 	var file = File.new()
 	# file_path = file_path
-	file.open(path + fn, File.WRITE)
+	file.open(path + fn + ".json", File.WRITE)
 	file.store_line(to_json(dialog))
 	
 	file.close()
