@@ -8,7 +8,7 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 [node name="GraphNode" type="GraphNode" groups=["graph_nodes"]]
 margin_right = 390.0
 margin_bottom = 257.0
-title = "New node"
+title = "NODE_New"
 show_close = true
 resizable = true
 slot/0/left_enabled = true
@@ -31,7 +31,7 @@ line_asset = NodePath("HBoxContainer/MainColumn/LineAsset")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 16.0
 margin_top = 24.0
-margin_right = 574.0
+margin_right = 599.0
 margin_bottom = 188.0
 custom_constants/separation = 40
 
@@ -76,21 +76,21 @@ text = "Raymond"
 
 [node name="DisplayName" type="HBoxContainer" parent="HBoxContainer/MainColumn"]
 visible = false
-margin_top = 41.0
-margin_right = 314.0
-margin_bottom = 96.0
+margin_top = 64.0
+margin_right = 503.0
+margin_bottom = 88.0
 custom_constants/separation = -9
 
 [node name="DisplayName" type="Label" parent="HBoxContainer/MainColumn/DisplayName"]
-margin_top = 15.0
-margin_right = 122.0
-margin_bottom = 40.0
+margin_top = 5.0
+margin_right = 89.0
+margin_bottom = 19.0
 text = "Display Name"
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/MainColumn/DisplayName"]
-margin_left = 113.0
-margin_right = 221.0
-margin_bottom = 55.0
+margin_left = 80.0
+margin_right = 138.0
+margin_bottom = 24.0
 
 [node name="LineAsset" type="HBoxContainer" parent="HBoxContainer/MainColumn"]
 visible = false
@@ -158,7 +158,7 @@ wrap_enabled = true
 visible = false
 margin_left = 543.0
 margin_right = 648.0
-margin_bottom = 236.0
+margin_bottom = 164.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -177,41 +177,41 @@ toggle_mode = true
 text = "Options"
 
 [node name="Text" type="Button" parent="HBoxContainer/AddColumn"]
-margin_top = 96.0
+margin_top = 24.0
 margin_right = 105.0
-margin_bottom = 116.0
+margin_bottom = 44.0
 toggle_mode = true
 text = "Text"
 
 [node name="Conditional" type="Button" parent="HBoxContainer/AddColumn"]
-margin_top = 144.0
+margin_top = 48.0
 margin_right = 105.0
-margin_bottom = 164.0
+margin_bottom = 68.0
 text = "+Conditional"
 
 [node name="LineAsset" type="Button" parent="HBoxContainer/AddColumn"]
-margin_top = 192.0
+margin_top = 72.0
 margin_right = 105.0
-margin_bottom = 212.0
+margin_bottom = 92.0
 toggle_mode = true
 text = "+LineAsset"
 
 [node name="Comment" type="Button" parent="HBoxContainer/AddColumn"]
-margin_top = 216.0
+margin_top = 96.0
 margin_right = 105.0
-margin_bottom = 236.0
+margin_bottom = 116.0
 toggle_mode = true
 text = "+Comment"
 
 [node name="More" type="Button" parent="HBoxContainer"]
 margin_left = 543.0
-margin_right = 558.0
+margin_right = 583.0
 margin_bottom = 164.0
-rect_min_size = Vector2( 15, 0 )
+rect_min_size = Vector2( 40, 0 )
 mouse_default_cursor_shape = 2
 custom_styles/normal = SubResource( 1 )
 toggle_mode = true
-text = "+"
+text = ">>"
 
 [connection signal="close_request" from="." to="." method="_on_GraphNode_close_request"]
 [connection signal="resize_request" from="." to="." method="_on_GraphNode_resize_request"]

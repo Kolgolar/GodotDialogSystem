@@ -1,88 +1,212 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
-[ext_resource path="res://Assets/LightTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/GreenTheme.tres" type="Theme" id=2]
+[ext_resource path="res://DialoguesSearcher.gd" type="Script" id=3]
+[ext_resource path="res://SaveAs.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-file_path = "4.2.2023_2028"
 
 [node name="GraphEdit" type="GraphEdit" parent="."]
-margin_top = 2.0
-margin_right = 1930.0
-margin_bottom = 1086.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 right_disconnects = true
-scroll_offset = Vector2( -40, -123 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 27.0
-margin_top = 82.0
-margin_right = 214.0
-margin_bottom = 133.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 75.0
+margin_right = 693.0
+margin_bottom = 115.0
+custom_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 685.0
+margin_bottom = 35.0
 custom_constants/separation = 10
 
-[node name="NewNode" type="Button" parent="HBoxContainer"]
-margin_right = 89.0
-margin_bottom = 51.0
-mouse_default_cursor_shape = 2
-text = "+ NODE"
+[node name="OpenNew" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 125.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
+text = "OPEN NEW"
 
-[node name="NewOption" type="Button" parent="HBoxContainer"]
-margin_left = 99.0
-margin_right = 206.0
-margin_bottom = 51.0
+[node name="Save" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 135.0
+margin_right = 260.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
 mouse_default_cursor_shape = 2
-text = "+ OPTION"
+text = "SAVE"
 
-[node name="Feature" type="Button" parent="HBoxContainer"]
-margin_left = 216.0
-margin_right = 334.0
-margin_bottom = 51.0
+[node name="SaveAs" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 270.0
+margin_right = 395.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
 mouse_default_cursor_shape = 2
-text = "+ FEATURE"
+text = "SAVE AS"
 
-[node name="NewRoll" type="Button" parent="HBoxContainer"]
-margin_left = 344.0
-margin_right = 471.0
-margin_bottom = 51.0
-mouse_default_cursor_shape = 2
-text = "+DICE ROLL"
-
-[node name="Save" type="Button" parent="HBoxContainer"]
-margin_left = 481.0
-margin_right = 539.0
-margin_bottom = 51.0
-mouse_default_cursor_shape = 2
-text = "RUN"
-
-[node name="Clear" type="Button" parent="HBoxContainer"]
-margin_left = 549.0
-margin_right = 627.0
-margin_bottom = 51.0
+[node name="Clear" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 405.0
+margin_right = 530.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
 mouse_default_cursor_shape = 2
 text = "CLEAR"
 
-[node name="Notification" type="Label" parent="HBoxContainer"]
+[node name="Notification" type="Label" parent="VBoxContainer/HBoxContainer"]
 visible = false
-margin_left = 509.0
-margin_top = 13.0
-margin_right = 575.0
-margin_bottom = 38.0
+margin_left = 540.0
+margin_top = 5.0
+margin_right = 606.0
+margin_bottom = 30.0
 text = "SAVED!"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 55.0
+margin_right = 685.0
+margin_bottom = 90.0
+custom_constants/separation = 10
+
+[node name="NewNode" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 125.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
+mouse_default_cursor_shape = 2
+text = "+ NODE"
+
+[node name="NewOption" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 135.0
+margin_right = 260.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
+mouse_default_cursor_shape = 2
+text = "+ OPTION"
+
+[node name="Feature" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 270.0
+margin_right = 395.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
+mouse_default_cursor_shape = 2
+text = "+ FEATURE"
+
+[node name="NewRoll" type="Button" parent="VBoxContainer/HBoxContainer2"]
+visible = false
+margin_left = 405.0
+margin_right = 530.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 125, 35 )
+mouse_default_cursor_shape = 2
+text = "+DICE ROLL"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
+[node name="DialoguesSearcher" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -346.0
+margin_top = -200.0
+margin_right = 346.0
+margin_bottom = 200.0
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialoguesSearcher"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = -15.0
+custom_constants/separation = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialoguesSearcher/VBoxContainer"]
+margin_right = 662.0
+margin_bottom = 55.0
+custom_constants/separation = 30
+
+[node name="LineEdit" type="LineEdit" parent="DialoguesSearcher/VBoxContainer/HBoxContainer"]
+margin_right = 547.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+placeholder_text = "Dialogues folder path"
+
+[node name="Search" type="Button" parent="DialoguesSearcher/VBoxContainer/HBoxContainer"]
+margin_left = 577.0
+margin_right = 662.0
+margin_bottom = 55.0
+text = "SEARCH"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DialoguesSearcher/VBoxContainer"]
+margin_top = 80.0
+margin_right = 662.0
+margin_bottom = 370.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Dialogues" type="VBoxContainer" parent="DialoguesSearcher/VBoxContainer/ScrollContainer"]
+margin_right = 662.0
+margin_bottom = 290.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FileName" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 10.0
+margin_right = 20.0
+margin_bottom = 25.0
+grow_horizontal = 2
+text = "FileName"
+align = 1
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -255.0
+margin_top = -70.5
+margin_right = 255.0
+margin_bottom = 70.5
+window_title = "Save as..."
+script = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -47.0
+
+[node name="LineEdit" type="LineEdit" parent="ConfirmationDialog/VBoxContainer"]
+margin_right = 494.0
+margin_bottom = 55.0
+placeholder_text = "File name"
+
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="disconnection_request" from="GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]
 [connection signal="gui_input" from="GraphEdit" to="." method="_on_GraphEdit_gui_input"]
-[connection signal="pressed" from="HBoxContainer/NewNode" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="HBoxContainer/NewOption" to="." method="_on_NewOption_pressed"]
-[connection signal="pressed" from="HBoxContainer/Feature" to="." method="_on_feature_pressed"]
-[connection signal="pressed" from="HBoxContainer/NewRoll" to="." method="_on_NewRoll_pressed"]
-[connection signal="pressed" from="HBoxContainer/Save" to="." method="_on_RunProgram_pressed"]
-[connection signal="pressed" from="HBoxContainer/Clear" to="." method="_on_Clear_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/OpenNew" to="." method="_on_OpenNew_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Save" to="." method="_on_RunProgram_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveAs" to="." method="_on_SaveAs_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Clear" to="." method="_on_Clear_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewNode" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewOption" to="." method="_on_NewOption_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Feature" to="." method="_on_feature_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewRoll" to="." method="_on_NewRoll_pressed"]
+[connection signal="directory_updated" from="DialoguesSearcher" to="." method="_on_DialoguesSearcher_directory_updated"]
+[connection signal="load_dialog" from="DialoguesSearcher" to="." method="load_save"]
+[connection signal="pressed" from="DialoguesSearcher/VBoxContainer/HBoxContainer/Search" to="DialoguesSearcher" method="_on_Search_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="ConfirmationDialog" method="_on_ConfirmationDialog_confirmed"]
+[connection signal="save_dialog_as" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_save_dialog_as"]

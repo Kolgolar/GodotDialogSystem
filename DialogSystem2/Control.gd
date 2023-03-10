@@ -3,16 +3,18 @@ extends Control
 var dialog = {}
 var dialog_for_localisation = []
 
-export(String) onready var file_path 
-
+# export(String) var file_path 
+var file_name := ""
+var directory := ""
 var initial_pos = Vector2(40,40)
 var node_index = 0
 onready var graph_edit = $GraphEdit
 onready var timer = $Timer
 
 func _ready():
-	if not file_path.empty():
-		load_save()
+	# if not file_path.empty():
+	# 	load_save()
+	pass
 	
 # ADD NEW NODE
 func _on_Button_pressed():
@@ -33,7 +35,9 @@ func _on_Button_pressed():
 	
 # SAVE 
 func _on_RunProgram_pressed(): 
-	
+	if file_name.empty():
+		$ConfirmationDialog.popup()
+		return
 	# extract data from nodes
 #	for node in range(0, connection_list.size()):
 	for node in get_tree().get_nodes_in_group("graph_nodes"):
@@ -52,8 +56,11 @@ func _on_RunProgram_pressed():
 		# go to
 		dialog_template["go to"] = []
 		for connection in graph_edit.get_connection_list():
+			# print(graph_edit.get_connection_list())
+			# print(node.name)
 			if connection["from"] == node.name:
-				dialog_template["go to"].append(connection["to"])		
+				dialog_template["go to"].append(get_node("GraphEdit/" + connection["to"]).title)		
+		# print(dialog_template)	
 
 		# dice roll
 		if node.node_type == "Dice Roll":
@@ -190,50 +197,63 @@ func _on_RunProgram_pressed():
 					dialog_template["conditionals"].append(one_stack)
 				
 			# go to
-			dialog_template["go to"] = []
-			for connection in graph_edit.get_connection_list():
-				if connection["from"] == node.name:
-					dialog_template["go to"].append(connection["to"])		
-					
+			# dialog_template["go to"] = []
+			# for connection in graph_edit.get_connection_list():
+			# 	if connection["from"] == node.name:
+			# 		dialog_template["go to"].append(get_node("GraphEdit/" + connection["to"]).title)	
 		# append to dictionary
 		dialog[node.title] = dialog_template
+	print(dialog)
+	# var time = OS.get_datetime()
+	# var year = str(time["year"])
+	# var month = str(time["month"])
+	# var day = str(time["day"])
+	# var hour = str(time["hour"])
+	# var minute = str(time["minute"])
+	# var file_path = day + "." + month + "." + year + "_" + hour + minute
+	save_dialog(directory, file_name)
 	
-	var time = OS.get_datetime()
-	var year = str(time["year"])
-	var month = str(time["month"])
-	var day = str(time["day"])
-	var hour = str(time["hour"])
-	var minute = str(time["minute"])
-	var file_path = day + "." + month + "." + year + "_" + hour + minute
-	save_dialog(file_path)
-	
-func save_dialog(file_path):	
+func save_dialog(path, fn):	
 	# save file
+	if fn.empty():
+		print("File name empty!")
+		return
 	var file = File.new()
-	file_path = "user://" + file_path
-	file.open(file_path, File.WRITE)
+	# file_path = file_path
+	file.open(path + fn, File.WRITE)
 	file.store_line(to_json(dialog))
-	file.close()
 	
-	$HBoxContainer/Notification.visible = true
+	file.close()
+	file_name = fn
+	$FileName.text = fn
+	
+	$VBoxContainer/HBoxContainer/Notification.visible = true
 	timer.start()
 	yield(timer, "timeout")
-	$HBoxContainer/Notification.visible = false
+	$VBoxContainer/HBoxContainer/Notification.visible = false
 	
+
 	
-	
-func load_save():
+func load_save(path, fn):
+	if path.empty() or fn.empty():
+		print("File not found!")
+		return
+	file_name = fn
+	$FileName.text = fn
+	_clear()
 	var file = File.new()
 
-	if not file.file_exists("user://" + file_path):
-		save_dialog(file_path)
-		OS.alert("New file is created.")
-		return
+	# if not file.file_exists(path):
+	# 	save_dialog(path)
+	# 	OS.alert("New file is created.")
+	# 	return
 
-	file.open("user://" + file_path, File.READ)
+	file.open(path + fn, File.READ)
 	var data = file.get_as_text()
 	data = parse_json(data)
 	file.close()
+
+	var graph_names := {}
 
 	for graph_node in data:
 		
@@ -422,10 +442,23 @@ func load_save():
 						skill_node.get_node("SkillPoints").text = stack["if skill"][skill_key[0]]
 
 		# node name
-		node.name = data[graph_node]["id"]
-		node.title = data[graph_node]["id"]
-		node.node_title.text = node.name
+		# node.name = data[graph_node]["id"]
+		var regex = RegEx.new()
+		regex.compile("(?<=[A-Z]_).+")
+		var full_title = data[graph_node]["id"]
+		var title = regex.search(full_title).strings[0]
+		node.title = full_title
+		node.node_title.text = title
 
+		# node offset
+		# offset
+		node.offset.x = data[graph_node]["offset x"]
+		node.offset.y = data[graph_node]["offset y"]
+		initial_pos = node.offset		
+
+		graph_names[graph_node] = node.name
+
+	for graph_node in data:
 		if "go to" in data[graph_node]:
 			
 			if "DICEROLL" in graph_node:
@@ -433,23 +466,22 @@ func load_save():
 				var go_to_count = 0
 				
 				for go_to in data[graph_node]["go to"]: # get each in array
-					graph_edit.connect_node(node.name, go_to_count, data[graph_node]["go to"][go_to_count], 0)
+					graph_edit.connect_node(graph_names[graph_node], go_to_count, graph_names[data[graph_node]["go to"][go_to_count]], 0)
 					
 					go_to_count += 1
 			else:		
 				var go_to_count = 0
 				for go_to in data[graph_node]["go to"]: # get each in array
-					graph_edit.connect_node(node.name, 0, data[graph_node]["go to"][go_to_count], 0)
+					graph_edit.connect_node(graph_names[graph_node], 0, graph_names[data[graph_node]["go to"][go_to_count]], 0)
 					
 					go_to_count += 1
-					
-		
-		# node offset
-		# offset
-		node.offset.x = data[graph_node]["offset x"]
-		node.offset.y = data[graph_node]["offset y"]
-		initial_pos = node.offset		
 
+
+func _clear() -> void:
+	for node in get_tree().get_nodes_in_group("graph_nodes"):
+		node.queue_free()
+	graph_edit.clear_connections()
+	node_index = 0
 
 
 func _on_NewOption_pressed():
@@ -487,15 +519,13 @@ func _on_GraphEdit_disconnection_request(from, from_slot, to, to_slot):
 	graph_edit.disconnect_node(from, from_slot, to, to_slot)
 
 func _on_Clear_pressed():
-	for node in get_tree().get_nodes_in_group("graph_nodes"):
-		node.queue_free()
-	graph_edit.clear_connections()
-	node_index = 0
+	_clear()
 
 
 func _on_GraphEdit_gui_input(event):
 	if Input.is_action_pressed("right_click"):
-		 _on_Button_pressed()
+		#  _on_Button_pressed()
+		pass
 	elif event is InputEventMouseButton and event.doubleclick:
 	  _on_NewOption_pressed()
 	elif Input.is_action_pressed("save"):
@@ -523,3 +553,22 @@ func _on_feature_pressed():
 	feature = feature.instance()
 	graph_edit.add_child(feature)
 	
+
+
+func _on_OpenNew_pressed():
+	$DialoguesSearcher.popup()
+	# OS.shell_open(str("C://"))
+
+
+func _on_SaveAs_pressed():
+	$ConfirmationDialog.popup()
+
+
+func _on_ConfirmationDialog_save_dialog_as(fn : String):
+	file_name = fn
+	_on_RunProgram_pressed()
+	save_dialog(directory, fn)
+
+
+func _on_DialoguesSearcher_directory_updated(path : String):
+	directory = path

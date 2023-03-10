@@ -18,13 +18,13 @@ config/icon="res://icon.png"
 
 CharacterProfiles="*res://Global/CharacterProfiles.gd"
 GameSave="*res://Global/GameSave.gd"
+SaS="*res://Global/save_system.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
-window/stretch/mode="2d"
+window/dpi/allow_hidpi=true
 
 [input]
 
@@ -35,7 +35,7 @@ right_click={
 }
 save={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":true,"command":true,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":true,"command":true,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 new_option={
@@ -43,6 +43,10 @@ new_option={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[mono]
+
+project/assembly_name="Dialog System 2"
 
 [physics]
 

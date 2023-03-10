@@ -105,5 +105,5 @@ func _on_Text_toggled(button_pressed):
 
 
 func _on_LineEdit_text_changed(new_text):
-	name = "NODE_" + new_text
+	# name = "NODE_" + new_text
 	title = "NODE_" + new_text
