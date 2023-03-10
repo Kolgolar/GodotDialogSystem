@@ -16,7 +16,17 @@ var if_stack
 
 # edit character drop down items
 #var profiles = ["Raymond", "Mable", "???", "Ren", "Narration", "Uncle Ping"]
-var profiles = ["Santa", "Elf"]
+var profiles = [
+	"Player",
+	"Char1",
+	"Char2",
+	"Char3",
+	"Char4",
+	"Char5",
+	"Char6",
+	"Char7",
+	"Char8",
+]
 
 var stack_count = 0
 var save_var_count = 0

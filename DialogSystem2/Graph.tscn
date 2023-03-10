@@ -32,7 +32,7 @@ custom_constants/separation = 10
 margin_right = 125.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 125, 35 )
-text = "OPEN NEW"
+text = "OPEN FILE"
 
 [node name="Save" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 135.0
@@ -56,7 +56,7 @@ margin_right = 530.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 125, 35 )
 mouse_default_cursor_shape = 2
-text = "CLEAR"
+text = "CLEAR ALL"
 
 [node name="Notification" type="Label" parent="VBoxContainer/HBoxContainer"]
 visible = false
@@ -166,7 +166,6 @@ margin_top = 10.0
 margin_right = 20.0
 margin_bottom = 25.0
 grow_horizontal = 2
-text = "FileName"
 align = 1
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
@@ -193,6 +192,10 @@ margin_bottom = -47.0
 margin_right = 494.0
 margin_bottom = 55.0
 placeholder_text = "File name"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="disconnection_request" from="GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]
