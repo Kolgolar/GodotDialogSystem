@@ -1,5 +1,7 @@
 extends Control
 
+export (NodePath) onready var _mouse_popup = get_node(_mouse_popup) as PopupMenu
+
 var dialog = {}
 var dialog_for_localisation = []
 var file_name := ""
@@ -17,11 +19,7 @@ func _ready():
 	
 # ADD NEW NODE
 func _on_NewNode_pressed():
-	var node = load("res://LineNode.tscn").instance()
-	graph_edit.add_child(node)
-	initial_pos = node.offset
-	max_id += 1
-	node.id = max_id
+	_create_new_node("res://LineNode.tscn")
 	# TODO: Autosave?
 	
 # SAVE 
@@ -37,7 +35,16 @@ func _on_Save_pressed():
 	# print(dialog)
 	save_dialog(directory, file_name)
 	
-	
+
+func _create_new_node(scene : String, pos := Vector2.ZERO) -> void:
+	var node = load(scene).instance()
+	graph_edit.add_child(node)
+	node.offset = graph_edit.scroll_offset + pos
+	initial_pos = node.offset
+	max_id += 1
+	node.id = max_id
+
+
 func save_dialog(path, fn):	
 	# save file
 	if fn.empty():
@@ -92,7 +99,7 @@ func load_save(path, fn):
 				printerr("Unknown node type!")
 		node = node.instance()
 		graph_edit.add_child(node)
-		node.set_data($GraphEdit, timeline[graph_node])
+		node.set_data($GraphEdit, timeline[graph_node], graph_node)
 		graph_names[graph_node] = node.name
 
 	for graph_node in timeline:
@@ -103,14 +110,17 @@ func load_save(path, fn):
 				go_to_count += 1
 
 
-
 func _clear() -> void:
 	for node in get_tree().get_nodes_in_group("graph_nodes"):
 		node.queue_free()
 	graph_edit.clear_connections()
 
-	
-# connect nodes
+
+func _call_mouse_popup() -> void:
+	_mouse_popup.rect_global_position = get_global_mouse_position()
+	_mouse_popup.popup()
+
+
 func _on_GraphEdit_connection_request(from, from_slot, to, to_slot):
 	graph_edit.connect_node(from, from_slot, to, to_slot)
 
@@ -121,16 +131,7 @@ func _on_GraphEdit_disconnection_request(from, from_slot, to, to_slot):
 
 func _on_GraphEdit_gui_input(event):
 	if Input.is_action_pressed("right_click"):
-		#  _on_Button_pressed()
-		pass
-	elif event is InputEventMouseButton and event.doubleclick:
-	#   _on_NewOption_pressed()
-		pass
-	elif Input.is_action_pressed("save"):
-		_on_Save_pressed()
-	elif Input.is_action_just_pressed("new_option"):
-		# _on_NewOption_pressed()
-		pass
+		_call_mouse_popup()
 	
 
 func _on_OpenNew_pressed():
@@ -153,3 +154,13 @@ func _on_DialoguesSearcher_directory_updated(path : String):
 
 func _on_Clear_pressed():
 	_clear()
+
+
+func _on_MousePopup_id_pressed(id:int):
+	match id:
+		0:
+			_create_new_node("res://LineNode.tscn", _mouse_popup.rect_global_position)
+		1:
+			_create_new_node("res://ConditionNode.tscn", _mouse_popup.rect_global_position)
+		_:
+			printerr("Unknown id!")

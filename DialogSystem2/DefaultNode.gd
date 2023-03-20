@@ -18,7 +18,7 @@ func _ready():
 	call_deferred("_update_title_text", "New")
 
 
-func set_data(graph_edit : GraphEdit, data : Dictionary) -> void:
+func set_data(graph_edit : GraphEdit, data : Dictionary, short_t : String) -> void:
 	pass
 
 
@@ -29,6 +29,7 @@ func gen_data(graph_edit : GraphEdit) -> Dictionary:
 func _update_title_text(new_text : String) -> void:
 	title = type + " " + new_text
 	short_title = new_text
+	node_title.text = short_title
 
 
 func _on_Title_text_changed(new_text : String):

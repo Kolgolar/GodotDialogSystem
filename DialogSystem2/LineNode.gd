@@ -29,8 +29,8 @@ func _ready():
 		char_index += 1 
 
 
-func set_data(graph_edit : GraphEdit, data : Dictionary) -> void:
-	id = data["id"]
+func set_data(graph_edit : GraphEdit, data : Dictionary, id_name : String) -> void:
+	id = int(id_name)
 	offset.x  = data["offset_x"]
 	offset.y = data["offset_y"]
 	character_drop.text = data["character"]
@@ -46,13 +46,12 @@ func set_data(graph_edit : GraphEdit, data : Dictionary) -> void:
 	# regex.compile("(?<=[A-Z]_).+")
 	# var short_title = regex.search(title).strings[0]
 	_update_title_text(data["title"])
-	node_title.text = short_title
 
 
 func gen_data(graph_edit : GraphEdit) -> Dictionary:
 	var line_data := {}
 	line_data["go_to"] = []
-	line_data["id"] = id
+	# line_data["id"] = id
 	line_data["type"] = type
 	line_data["title"] = short_title
 	line_data["offset_x"] = offset.x
