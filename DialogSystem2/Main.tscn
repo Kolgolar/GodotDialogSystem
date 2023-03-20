@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Control.gd" type="Script" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Assets/GreenTheme.tres" type="Theme" id=2]
 [ext_resource path="res://DialoguesSearcher.gd" type="Script" id=3]
 [ext_resource path="res://SaveAs.gd" type="Script" id=4]
 
-[node name="Control" type="Control"]
+[node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -80,6 +80,7 @@ mouse_default_cursor_shape = 2
 text = "+ NODE"
 
 [node name="NewOption" type="Button" parent="VBoxContainer/HBoxContainer2"]
+visible = false
 margin_left = 135.0
 margin_right = 260.0
 margin_bottom = 35.0
@@ -88,6 +89,7 @@ mouse_default_cursor_shape = 2
 text = "+ OPTION"
 
 [node name="Feature" type="Button" parent="VBoxContainer/HBoxContainer2"]
+visible = false
 margin_left = 270.0
 margin_right = 395.0
 margin_bottom = 35.0
@@ -143,7 +145,7 @@ placeholder_text = "Dialogues folder path"
 margin_left = 577.0
 margin_right = 662.0
 margin_bottom = 55.0
-text = "SEARCH"
+text = "REFRESH"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="DialoguesSearcher/VBoxContainer"]
 margin_top = 80.0
@@ -186,7 +188,7 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -47.0
+margin_bottom = -46.0
 
 [node name="LineEdit" type="LineEdit" parent="ConfirmationDialog/VBoxContainer"]
 margin_right = 494.0
@@ -201,15 +203,15 @@ margin_bottom = 40.0
 [connection signal="disconnection_request" from="GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]
 [connection signal="gui_input" from="GraphEdit" to="." method="_on_GraphEdit_gui_input"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OpenNew" to="." method="_on_OpenNew_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Save" to="." method="_on_RunProgram_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveAs" to="." method="_on_SaveAs_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Clear" to="." method="_on_Clear_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewNode" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewNode" to="." method="_on_NewNode_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewOption" to="." method="_on_NewOption_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Feature" to="." method="_on_feature_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewRoll" to="." method="_on_NewRoll_pressed"]
 [connection signal="directory_updated" from="DialoguesSearcher" to="." method="_on_DialoguesSearcher_directory_updated"]
 [connection signal="load_dialog" from="DialoguesSearcher" to="." method="load_save"]
-[connection signal="pressed" from="DialoguesSearcher/VBoxContainer/HBoxContainer/Search" to="DialoguesSearcher" method="_on_Search_pressed"]
+[connection signal="pressed" from="DialoguesSearcher/VBoxContainer/HBoxContainer/Search" to="DialoguesSearcher" method="_on_Refresh_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="ConfirmationDialog" method="_on_ConfirmationDialog_confirmed"]
 [connection signal="save_dialog_as" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_save_dialog_as"]

@@ -8,10 +8,26 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "GraphNode",
+"class": "DefaultNode",
+"language": "GDScript",
+"path": "res://DefaultNode.gd"
+}, {
+"base": "DefaultNode",
+"class": "LineNode",
+"language": "GDScript",
+"path": "res://LineNode.gd"
+} ]
+_global_script_class_icons={
+"DefaultNode": "",
+"LineNode": ""
+}
+
 [application]
 
 config/name="Dialog System 2"
-run/main_scene="res://Graph.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]

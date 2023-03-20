@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DefaultNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://LineNode.gd" type="Script" id=2]
+
+[node name="GraphNode" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+text = NodePath("HBoxContainer/MainColumn/Text/Text")
+localization_id = NodePath("HBoxContainer/MainColumn/LocalizationLine/LocalizationLine")
+choice_name = NodePath("HBoxContainer/MainColumn/Title/ChoiceName")
+custom_char_name = NodePath("HBoxContainer/MainColumn/Character/CustomCharName")
+character_drop = NodePath("HBoxContainer/MainColumn/Character/CharacterDrop")
+
+[node name="HBoxContainer" parent="." index="0"]
+margin_right = 640.0
+margin_bottom = 307.0
+
+[node name="MainColumn" parent="HBoxContainer" index="0"]
+margin_right = 640.0
+margin_bottom = 277.0
+
+[node name="Title" parent="HBoxContainer/MainColumn" index="0"]
+margin_right = 640.0
+
+[node name="ChoiceName" type="LineEdit" parent="HBoxContainer/MainColumn/Title" index="2"]
+margin_left = 390.0
+margin_right = 640.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 250, 32 )
+placeholder_text = "Choice name"
+
+[node name="Character" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="2"]
+margin_top = 58.0
+margin_right = 640.0
+margin_bottom = 106.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/MainColumn/Character" index="0"]
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 32 )
+text = "Character"
+valign = 1
+
+[node name="CharacterDrop" type="OptionButton" parent="HBoxContainer/MainColumn/Character" index="1"]
+margin_left = 130.0
+margin_right = 380.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 250, 32 )
+
+[node name="CustomCharName" type="LineEdit" parent="HBoxContainer/MainColumn/Character" index="2"]
+margin_left = 390.0
+margin_right = 640.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 250, 32 )
+placeholder_text = "Custom char name"
+
+[node name="LocalizationLine" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="3"]
+margin_top = 116.0
+margin_right = 640.0
+margin_bottom = 167.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/MainColumn/LocalizationLine" index="0"]
+margin_right = 120.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 120, 32 )
+text = "Localization line id"
+valign = 1
+autowrap = true
+
+[node name="LocalizationLine" type="LineEdit" parent="HBoxContainer/MainColumn/LocalizationLine" index="1"]
+margin_left = 130.0
+margin_right = 380.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 250, 32 )
+placeholder_text = "hatsbydialog_player_69"
+
+[node name="Text" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="4"]
+margin_top = 177.0
+margin_right = 640.0
+margin_bottom = 277.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/MainColumn/Text" index="0"]
+margin_top = 38.0
+margin_right = 120.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 120, 0 )
+text = "Text"
+
+[node name="Text" type="TextEdit" parent="HBoxContainer/MainColumn/Text" index="1"]
+margin_left = 130.0
+margin_right = 640.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 100 )
+size_flags_horizontal = 3
+text = "Character line. Using when localization line id is empty or has invalid data."
+wrap_enabled = true
+caret_blink = true

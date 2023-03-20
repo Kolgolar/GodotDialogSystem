@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=11 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://Assets/AdobeClean-SemiCn.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Clean.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/AdobeClean-Bold.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 7.0
@@ -26,6 +27,13 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="DynamicFont" id=12]
+size = 22
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=9]
 content_margin_top = 30.0
@@ -52,7 +60,7 @@ expand_margin_top = 15.0
 expand_margin_bottom = 15.0
 
 [sub_resource type="DynamicFont" id=7]
-size = 24
+size = 18
 use_mipmaps = true
 use_filter = true
 extra_spacing_char = 2
@@ -100,6 +108,7 @@ GraphNode/colors/close_color = Color( 1, 1, 1, 1 )
 GraphNode/colors/resizer_color = Color( 1, 1, 1, 1 )
 GraphNode/colors/title_color = Color( 1, 1, 1, 1 )
 GraphNode/constants/port_offset = -17
+GraphNode/fonts/title_font = SubResource( 12 )
 GraphNode/styles/frame = SubResource( 9 )
 GraphNode/styles/selectedframe = SubResource( 10 )
 Label/colors/font_color = Color( 0.356863, 0.721569, 0.345098, 1 )

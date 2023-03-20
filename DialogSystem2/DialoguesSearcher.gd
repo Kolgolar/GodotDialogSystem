@@ -52,11 +52,14 @@ func _get_dialogues() -> void:
 	
 
 func _on_dialogue_choosen(file_name : String) -> void:
+	# file_name = file_name.split(".json")[0]
+	print(_folder_path)
+	print(file_name)
 	emit_signal("load_dialog", _folder_path, file_name)
 	popup()
 
 
-func _on_Search_pressed() -> void:
+func _on_Refresh_pressed() -> void:
 	_get_dialogues()
 	SaS.default_directory = _directory.text
 	SaS.save_data()
