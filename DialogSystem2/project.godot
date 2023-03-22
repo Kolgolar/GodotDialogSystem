@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "SetterNode",
+"class": "CallerNode",
+"language": "GDScript",
+"path": "res://CallerNode.gd"
+}, {
 "base": "GraphNode",
 "class": "DefaultNode",
 "language": "GDScript",
@@ -18,10 +23,23 @@ _global_script_classes=[ {
 "class": "LineNode",
 "language": "GDScript",
 "path": "res://LineNode.gd"
+}, {
+"base": "DefaultNode",
+"class": "SetterNode",
+"language": "GDScript",
+"path": "res://SetterNode.gd"
+}, {
+"base": "DefaultNode",
+"class": "StartNode",
+"language": "GDScript",
+"path": "res://StartNode.gd"
 } ]
 _global_script_class_icons={
+"CallerNode": "",
 "DefaultNode": "",
-"LineNode": ""
+"LineNode": "",
+"SetterNode": "",
+"StartNode": ""
 }
 
 [application]

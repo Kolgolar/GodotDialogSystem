@@ -2,9 +2,9 @@ extends GraphNode
 
 class_name DefaultNode
 
-export(NodePath) onready var main = get_node(main) as VBoxContainer
-export(NodePath) onready var node_title =  get_node(node_title) as LineEdit
-export(NodePath) onready var comment_box = get_node(comment_box) as HBoxContainer
+onready var main = $HBoxContainer/MainColumn
+onready var node_title =  $HBoxContainer/MainColumn/Title/Title
+onready var comment_box = $HBoxContainer/MainColumn/Comment
 
 onready var type := "DEFAULT"
 
@@ -15,10 +15,29 @@ signal name_changed
 
 
 func _ready():
-	call_deferred("_update_title_text", "New")
+	# call_deferred("_update_title_text", "New")
+	pass
 
 
-func set_data(graph_edit : GraphEdit, data : Dictionary, short_t : String) -> void:
+func set_base_data(graph_edit : GraphEdit, data : Dictionary, id_name : String) -> void:
+	id = int(id_name)
+	offset.x  = data["offset_x"]
+	offset.y = data["offset_y"]
+	type = data["type"]
+	_update_title_text(data["title"])
+
+
+func gen_base_data() -> Dictionary:
+	var data := {}
+	# data["id"] = id
+	data["type"] = type
+	data["title"] = short_title
+	data["offset_x"] = offset.x
+	data["offset_y"] = offset.y
+	return {str(id) : data}
+
+
+func set_data(graph_edit : GraphEdit, data : Dictionary, id_name : String) -> void:
 	pass
 
 
@@ -26,14 +45,20 @@ func gen_data(graph_edit : GraphEdit) -> Dictionary:
 	return {}
 
 
-func _update_title_text(new_text : String) -> void:
+func delete() -> void:
+	_on_GraphNode_close_request()
+
+
+func _update_title_text(new_text : String, update_node_text := true) -> void:
 	title = type + " " + new_text
 	short_title = new_text
-	node_title.text = short_title
+	print(short_title)
+	if update_node_text:
+		node_title.text = short_title
 
 
 func _on_Title_text_changed(new_text : String):
-	_update_title_text(new_text)
+	_update_title_text(new_text, false)
 
 
 func _on_GraphNode_resize_request(new_minsize):
@@ -41,7 +66,4 @@ func _on_GraphNode_resize_request(new_minsize):
 
 
 func _on_GraphNode_close_request():
-	# # if last node is deleted, replace that node index and name
-	# if get_parent().get_parent().node_index == (int(self.name.lstrip("Node "))):
-	# 	get_parent().get_parent().node_index -= 1
 	queue_free()

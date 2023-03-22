@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DefaultNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SetterNode.gd" type="Script" id=2]
+
+[node name="SetterNode" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+var_name = NodePath("HBoxContainer/MainColumn/Var/Var")
+var_value = NodePath("HBoxContainer/MainColumn/Value/Value")
+
+[node name="HBoxContainer" parent="." index="0"]
+margin_bottom = 194.0
+
+[node name="MainColumn" parent="HBoxContainer" index="0"]
+margin_bottom = 164.0
+
+[node name="Var" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="2"]
+margin_top = 58.0
+margin_right = 532.0
+margin_bottom = 106.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/MainColumn/Var" index="0"]
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 32 )
+text = "Var name"
+valign = 1
+
+[node name="Var" type="LineEdit" parent="HBoxContainer/MainColumn/Var" index="1"]
+margin_left = 130.0
+margin_right = 380.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 250, 32 )
+
+[node name="Value" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="3"]
+margin_top = 116.0
+margin_right = 532.0
+margin_bottom = 164.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/MainColumn/Value" index="0"]
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 32 )
+text = "Var value"
+valign = 1
+
+[node name="Value" type="LineEdit" parent="HBoxContainer/MainColumn/Value" index="1"]
+margin_left = 130.0
+margin_right = 380.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 250, 32 )

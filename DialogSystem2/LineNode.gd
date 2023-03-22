@@ -30,9 +30,6 @@ func _ready():
 
 
 func set_data(graph_edit : GraphEdit, data : Dictionary, id_name : String) -> void:
-	id = int(id_name)
-	offset.x  = data["offset_x"]
-	offset.y = data["offset_y"]
 	character_drop.text = data["character"]
 	text.text = data["text"]
 	if "choice_name" in data:
@@ -41,31 +38,25 @@ func set_data(graph_edit : GraphEdit, data : Dictionary, id_name : String) -> vo
 		localization_id.text = data["localization_id"]
 	if "custom_char_name" in data:
 		custom_char_name.text = data["custom_char_name"]
-	
-	# var regex = RegEx.new()
-	# regex.compile("(?<=[A-Z]_).+")
-	# var short_title = regex.search(title).strings[0]
-	_update_title_text(data["title"])
 
 
 func gen_data(graph_edit : GraphEdit) -> Dictionary:
-	var line_data := {}
-	line_data["go_to"] = []
-	# line_data["id"] = id
-	line_data["type"] = type
-	line_data["title"] = short_title
-	line_data["offset_x"] = offset.x
-	line_data["offset_y"] = offset.y
-	line_data["character"] = character_drop.text
-	line_data["text"] = text.text
+	var data := {}
+	data["go_to"] = []
+	# data["id"] = id
+	# data["type"] = type
+	# data["title"] = short_title
+	# data["offset_x"] = offset.x
+	# data["offset_y"] = offset.y
+	data["character"] = character_drop.text
+	data["text"] = text.text
 	if not choice_name.text.empty():
-		line_data["choice_name"] = choice_name.text
+		data["choice_name"] = choice_name.text
 	if not localization_id.text.empty():
-		line_data["localization_id"] = localization_id.text
+		data["localization_id"] = localization_id.text
 	if not custom_char_name.text.empty():
-		line_data["custom_char_name"] = custom_char_name.text
+		data["custom_char_name"] = custom_char_name.text
 	for connection in graph_edit.get_connection_list():
 		if connection["from"] == name:
-			line_data["go_to"].append(str(graph_edit.get_node(connection["to"]).id))
-	
-	return {str(id) : line_data}
+			data["go_to"].append(str(graph_edit.get_node(connection["to"]).id))
+	return data

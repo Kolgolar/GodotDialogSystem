@@ -13,11 +13,11 @@ character_drop = NodePath("HBoxContainer/MainColumn/Character/CharacterDrop")
 
 [node name="HBoxContainer" parent="." index="0"]
 margin_right = 640.0
-margin_bottom = 307.0
+margin_bottom = 311.0
 
 [node name="MainColumn" parent="HBoxContainer" index="0"]
 margin_right = 640.0
-margin_bottom = 277.0
+margin_bottom = 281.0
 
 [node name="Title" parent="HBoxContainer/MainColumn" index="0"]
 margin_right = 640.0
@@ -59,12 +59,12 @@ placeholder_text = "Custom char name"
 [node name="LocalizationLine" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="3"]
 margin_top = 116.0
 margin_right = 640.0
-margin_bottom = 167.0
+margin_bottom = 171.0
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="HBoxContainer/MainColumn/LocalizationLine" index="0"]
 margin_right = 120.0
-margin_bottom = 51.0
+margin_bottom = 55.0
 rect_min_size = Vector2( 120, 32 )
 text = "Localization line id"
 valign = 1
@@ -73,20 +73,20 @@ autowrap = true
 [node name="LocalizationLine" type="LineEdit" parent="HBoxContainer/MainColumn/LocalizationLine" index="1"]
 margin_left = 130.0
 margin_right = 380.0
-margin_bottom = 51.0
+margin_bottom = 55.0
 rect_min_size = Vector2( 250, 32 )
 placeholder_text = "hatsbydialog_player_69"
 
 [node name="Text" type="HBoxContainer" parent="HBoxContainer/MainColumn" index="4"]
-margin_top = 177.0
+margin_top = 181.0
 margin_right = 640.0
-margin_bottom = 277.0
+margin_bottom = 281.0
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="HBoxContainer/MainColumn/Text" index="0"]
-margin_top = 38.0
+margin_top = 37.0
 margin_right = 120.0
-margin_bottom = 62.0
+margin_bottom = 63.0
 rect_min_size = Vector2( 120, 0 )
 text = "Text"
 
@@ -96,6 +96,7 @@ margin_right = 640.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 400, 100 )
 size_flags_horizontal = 3
-text = "Character line. Using when localization line id is empty or has invalid data."
+text = "[used when localization line
+id is empty or has invalid data]"
 wrap_enabled = true
 caret_blink = true

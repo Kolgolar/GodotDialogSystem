@@ -4,20 +4,74 @@
 [ext_resource path="res://ConditionNode.gd" type="Script" id=2]
 
 [node name="ConditionNode" instance=ExtResource( 1 )]
-slot/1/left_enabled = false
+margin_right = 416.0
+margin_bottom = 183.0
+custom_constants/separation = 15
+slot/0/left_enabled = false
+slot/0/right_enabled = false
+slot/1/left_enabled = true
 slot/1/left_type = 0
 slot/1/left_color = Color( 1, 1, 1, 1 )
-slot/1/right_enabled = false
+slot/1/right_enabled = true
 slot/1/right_type = 0
-slot/1/right_color = Color( 1, 1, 1, 1 )
+slot/1/right_color = Color( 0.517647, 1, 0.117647, 1 )
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color( 1, 1, 1, 1 )
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color( 1, 1, 1, 1 )
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color( 1, 1, 1, 1 )
+slot/3/right_enabled = true
+slot/3/right_type = 0
+slot/3/right_color = Color( 1, 0.156863, 0.117647, 1 )
 script = ExtResource( 2 )
+condition_var = NodePath("ConditionVar/ConditionVar")
+
+[node name="HBoxContainer" parent="." index="0"]
+margin_right = 416.0
+
+[node name="MainColumn" parent="HBoxContainer" index="0"]
+margin_right = 416.0
+
+[node name="Title" parent="HBoxContainer/MainColumn" index="0"]
+margin_right = 416.0
 
 [node name="Comment" parent="HBoxContainer/MainColumn" index="1"]
 margin_top = 58.0
 margin_right = 532.0
 margin_bottom = 158.0
 
-[node name="Control" type="Control" parent="." index="1"]
-margin_top = 79.0
-margin_right = 532.0
-margin_bottom = 79.0
+[node name="True" type="Control" parent="." index="1"]
+margin_top = 93.0
+margin_right = 416.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="ConditionVar" type="HBoxContainer" parent="." index="2"]
+margin_top = 138.0
+margin_right = 416.0
+margin_bottom = 186.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="ConditionVar" index="0"]
+margin_top = 8.0
+margin_right = 126.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 32 )
+text = "Condition var"
+valign = 1
+
+[node name="ConditionVar" type="LineEdit" parent="ConditionVar" index="1"]
+margin_left = 136.0
+margin_right = 386.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 250, 32 )
+
+[node name="False" type="Control" parent="." index="3"]
+margin_top = 201.0
+margin_right = 416.0
+margin_bottom = 246.0
+rect_min_size = Vector2( 0, 45 )

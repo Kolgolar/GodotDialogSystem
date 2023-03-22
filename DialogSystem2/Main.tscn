@@ -70,10 +70,11 @@ text = "SAVED!"
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 55.0
 margin_right = 685.0
-margin_bottom = 90.0
+margin_bottom = 55.0
 custom_constants/separation = 10
 
 [node name="NewNode" type="Button" parent="VBoxContainer/HBoxContainer2"]
+visible = false
 margin_right = 125.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 125, 35 )
@@ -133,23 +134,23 @@ custom_constants/separation = 25
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DialoguesSearcher/VBoxContainer"]
 margin_right = 662.0
-margin_bottom = 55.0
+margin_bottom = 48.0
 custom_constants/separation = 30
 
 [node name="LineEdit" type="LineEdit" parent="DialoguesSearcher/VBoxContainer/HBoxContainer"]
-margin_right = 547.0
-margin_bottom = 55.0
+margin_right = 540.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 placeholder_text = "Dialogues folder path"
 
 [node name="Search" type="Button" parent="DialoguesSearcher/VBoxContainer/HBoxContainer"]
-margin_left = 577.0
+margin_left = 570.0
 margin_right = 662.0
-margin_bottom = 55.0
+margin_bottom = 48.0
 text = "REFRESH"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="DialoguesSearcher/VBoxContainer"]
-margin_top = 80.0
+margin_top = 73.0
 margin_right = 662.0
 margin_bottom = 370.0
 size_flags_horizontal = 3
@@ -157,7 +158,7 @@ size_flags_vertical = 3
 
 [node name="Dialogues" type="VBoxContainer" parent="DialoguesSearcher/VBoxContainer/ScrollContainer"]
 margin_right = 662.0
-margin_bottom = 290.0
+margin_bottom = 297.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -189,11 +190,11 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -46.0
+margin_bottom = -48.0
 
 [node name="LineEdit" type="LineEdit" parent="ConfirmationDialog/VBoxContainer"]
 margin_right = 494.0
-margin_bottom = 55.0
+margin_bottom = 48.0
 placeholder_text = "File name"
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -209,7 +210,28 @@ margin_left = -10.0
 margin_top = -10.0
 margin_right = 10.0
 margin_bottom = 10.0
-items = [ "+ Line", null, 0, false, false, 0, 0, null, "", false, "+ Condition", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "+ START", null, 0, false, false, 0, 0, null, "", false, "+ Line", null, 0, false, false, 1, 0, null, "", false, "+ Condition", null, 0, false, false, 2, 0, null, "", false, "+ Setter", null, 0, false, false, 3, 0, null, "", false, "+ Caller", null, 0, false, false, 4, 0, null, "", false ]
+
+[node name="Error" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -125.0
+margin_right = 300.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 600, 250 )
+window_title = "ЁКАРНЫЙ БАБАЙ"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Error"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -48.0
+text = "Произошла залупа. Чекай логи."
 
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="disconnection_request" from="GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]
@@ -222,6 +244,7 @@ items = [ "+ Line", null, 0, false, false, 0, 0, null, "", false, "+ Condition",
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewOption" to="." method="_on_NewOption_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Feature" to="." method="_on_feature_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/NewRoll" to="." method="_on_NewRoll_pressed"]
+[connection signal="about_to_show" from="DialoguesSearcher" to="DialoguesSearcher" method="_on_DialoguesSearcher_about_to_show"]
 [connection signal="directory_updated" from="DialoguesSearcher" to="." method="_on_DialoguesSearcher_directory_updated"]
 [connection signal="load_dialog" from="DialoguesSearcher" to="." method="load_save"]
 [connection signal="pressed" from="DialoguesSearcher/VBoxContainer/HBoxContainer/Search" to="DialoguesSearcher" method="_on_Refresh_pressed"]
