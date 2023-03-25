@@ -10,10 +10,7 @@ func _ready():
 
 func gen_data(graph_edit : GraphEdit) -> Dictionary:
 	var data := {}
-	data["go_to"] = []
-	for connection in graph_edit.get_connection_list():
-		if connection["from"] == name:
-			data["go_to"].append(str(graph_edit.get_node(connection["to"]).id))
+	data["go_to"] = _arrange_go_to(graph_edit)
 	return data
 
 	

@@ -49,10 +49,24 @@ func delete() -> void:
 	_on_GraphNode_close_request()
 
 
+func _arrange_go_to(graph_edit : GraphEdit, port_id := 0) -> Array:
+	var to_nodes_pos_y := {}
+	for connection in graph_edit.get_connection_list():
+		if connection["from"] == self.name and connection["from_port"] == port_id:
+			var to_node : GraphNode = graph_edit.get_node(connection["to"])
+			to_nodes_pos_y[to_node.offset.y] = str(to_node.id)
+
+	var coords = to_nodes_pos_y.keys()
+	coords.sort()
+	var arranged_arr := []
+	for n in coords:
+		arranged_arr.append(to_nodes_pos_y[n])
+	return arranged_arr
+
+
 func _update_title_text(new_text : String, update_node_text := true) -> void:
 	title = type + " " + new_text
 	short_title = new_text
-	print(short_title)
 	if update_node_text:
 		node_title.text = short_title
 

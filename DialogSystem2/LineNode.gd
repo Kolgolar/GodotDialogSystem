@@ -43,11 +43,6 @@ func set_data(graph_edit : GraphEdit, data : Dictionary, id_name : String) -> vo
 func gen_data(graph_edit : GraphEdit) -> Dictionary:
 	var data := {}
 	data["go_to"] = []
-	# data["id"] = id
-	# data["type"] = type
-	# data["title"] = short_title
-	# data["offset_x"] = offset.x
-	# data["offset_y"] = offset.y
 	data["character"] = character_drop.text
 	data["text"] = text.text
 	if not choice_name.text.empty():
@@ -56,7 +51,6 @@ func gen_data(graph_edit : GraphEdit) -> Dictionary:
 		data["localization_id"] = localization_id.text
 	if not custom_char_name.text.empty():
 		data["custom_char_name"] = custom_char_name.text
-	for connection in graph_edit.get_connection_list():
-		if connection["from"] == name:
-			data["go_to"].append(str(graph_edit.get_node(connection["to"]).id))
+	
+	data["go_to"] = _arrange_go_to(graph_edit)
 	return data

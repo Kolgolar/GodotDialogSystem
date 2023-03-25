@@ -53,3 +53,4 @@ margin_left = 130.0
 margin_right = 380.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 250, 32 )
+placeholder_text = "INT or BOOL only!"

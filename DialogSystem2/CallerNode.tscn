@@ -16,4 +16,4 @@ placeholder_text = "func_name"
 text = "Args"
 
 [node name="Value" parent="HBoxContainer/MainColumn/Value" index="1"]
-placeholder_text = "a,b,c..."
+placeholder_text = "a,b,c... (can be empty)"
