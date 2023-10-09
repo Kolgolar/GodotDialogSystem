@@ -49,10 +49,9 @@ func _on_Save_pressed():
 
 func _input(event):
 	if event.is_action_pressed("duplicate"):
-		print("SHESH")
 		var shift := Vector2(30, 30)
 		for n in focused_nodes:
-			if is_instance_valid(n):
+			if is_instance_valid(n) and not n is StartNode:
 				var new_node : GraphNode = n.duplicate()
 				new_node.offset += shift
 				(n as GraphNode).selected = false
@@ -61,12 +60,12 @@ func _input(event):
 				focused_nodes.append(new_node)
 				graph_edit.add_child(new_node)
 			else:
-				printerr("Can't get focused node. Perhaps it was deleted.")
+				printerr("Node is not valid or you're trying to duplicate Start Node (u cant, bro)")
 	elif event.is_action_pressed("delete"):
 		for n in focused_nodes:
 			if is_instance_valid(n):
-				focused_nodes.erase(n)
-				n.queue_free()
+				n.delete()
+		focused_nodes.clear()
 
 
 func _on_GraphEdit_node_selected(node):
@@ -296,7 +295,7 @@ func _on_DialoguesSearcher_directory_updated(path : String):
 
 
 func _on_Clear_pressed():
-	_clear()
+	$Deletion.popup_centered()
 
 
 func _on_MousePopup_id_pressed(id:int):
@@ -328,3 +327,7 @@ func _on_GraphEdit_connection_to_empty(from, from_slot, release_position):
 	from_node_to_empty = from
 	slot_to_connect = from_slot
 	_call_mouse_popup()
+
+
+func _on_Deletion_confirmed():
+	_clear()

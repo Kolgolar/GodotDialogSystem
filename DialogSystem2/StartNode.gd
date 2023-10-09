@@ -16,4 +16,4 @@ func gen_data(graph_edit : GraphEdit) -> Dictionary:
 	
 func _on_GraphNode_close_request() -> void:
 	emit_signal("on_delete")
-	queue_free()
+	delete()

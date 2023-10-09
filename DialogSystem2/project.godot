@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Dialog System 2"
+config/name="DUPA (BETA)"
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://Assets/hamez_team_logo.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )

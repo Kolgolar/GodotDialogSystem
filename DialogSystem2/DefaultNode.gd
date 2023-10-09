@@ -46,7 +46,9 @@ func gen_data(graph_edit : GraphEdit) -> Dictionary:
 
 
 func delete() -> void:
-	_on_GraphNode_close_request()
+	clear_all_slots()
+
+	queue_free()
 
 
 func _arrange_go_to(graph_edit : GraphEdit, port_id := 0) -> Array:
@@ -80,4 +82,4 @@ func _on_GraphNode_resize_request(new_minsize):
 
 
 func _on_GraphNode_close_request():
-	queue_free()
+	delete()

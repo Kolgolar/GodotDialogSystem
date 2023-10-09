@@ -100,8 +100,7 @@ margin_right = 640.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 400, 100 )
 size_flags_horizontal = 3
-text = "[used when localization line
-id is empty or has invalid data]
+text = "(used when localization line ID is empty or has invalid data)
 "
 wrap_enabled = true
 caret_blink = true

@@ -28,7 +28,7 @@ func _get_dialogues() -> void:
 		var file = dir.get_next()
 		if file == "":
 			break
-		elif not file.begins_with("."): # TODO: Check for .json
+		elif not file.begins_with(".") and file.ends_with(".json"): # TODO: Check for .json
 			files.append(file)
 
 	dir.list_dir_end()
