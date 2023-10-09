@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/GreenTheme.tres" type="Theme" id=2]
 
 [node name="DefaultNode" type="GraphNode" groups=["graph_nodes"]]
-margin_right = 532.0
-margin_bottom = 256.0
+margin_right = 380.0
+margin_bottom = 75.0
 theme = ExtResource( 2 )
 title = "New"
 show_close = true
@@ -19,26 +19,26 @@ slot/0/right_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 2.0
 margin_top = 30.0
-margin_right = 532.0
-margin_bottom = 78.0
+margin_right = 382.0
+margin_bottom = 62.0
 custom_constants/separation = 40
 
 [node name="MainColumn" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 532.0
-margin_bottom = 48.0
+margin_right = 380.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="Title" type="HBoxContainer" parent="HBoxContainer/MainColumn"]
-margin_right = 532.0
-margin_bottom = 48.0
+margin_right = 380.0
+margin_bottom = 32.0
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="HBoxContainer/MainColumn/Title"]
-margin_top = 8.0
 margin_right = 120.0
-margin_bottom = 40.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 120, 32 )
 text = "Title"
 valign = 1
@@ -46,7 +46,7 @@ valign = 1
 [node name="Title" type="LineEdit" parent="HBoxContainer/MainColumn/Title"]
 margin_left = 130.0
 margin_right = 380.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 250, 32 )
 
 [node name="Comment" type="HBoxContainer" parent="HBoxContainer/MainColumn"]

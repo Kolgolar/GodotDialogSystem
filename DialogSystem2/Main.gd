@@ -8,8 +8,14 @@ var file_name := ""
 var directory := ""
 var initial_pos = Vector2(40,40)
 
+var focused_nodes := []
+
 var max_id = 1
 var start_node : StartNode
+
+var from_empty_to_node : String
+var slot_to_connect : int
+var from_node_to_empty : String
 
 onready var error_popup = $Error
 onready var error_popup_label = $Error/RichTextLabel
@@ -41,16 +47,55 @@ func _on_Save_pressed():
 	save_dialog(directory, file_name)
 	
 
+func _input(event):
+	if event.is_action_pressed("duplicate"):
+		print("SHESH")
+		var shift := Vector2(30, 30)
+		for n in focused_nodes:
+			if is_instance_valid(n):
+				var new_node : GraphNode = n.duplicate()
+				new_node.offset += shift
+				(n as GraphNode).selected = false
+				new_node.selected = true
+				focused_nodes.erase(n)
+				focused_nodes.append(new_node)
+				graph_edit.add_child(new_node)
+			else:
+				printerr("Can't get focused node. Perhaps it was deleted.")
+	elif event.is_action_pressed("delete"):
+		for n in focused_nodes:
+			if is_instance_valid(n):
+				focused_nodes.erase(n)
+				n.queue_free()
+
+
+func _on_GraphEdit_node_selected(node):
+	focused_nodes.append(node)
+
+
+func _on_GraphEdit_node_unselected(node):
+	focused_nodes.erase(node)
+
+
 func _create_graph_node(scene : String, pos := Vector2.ZERO, _is_start_node := false, set_to_defaults := true) -> GraphNode:
 	var node = load(scene).instance()
 	graph_edit.add_child(node)
 	if node is StartNode:
 		$MousePopup.set_item_disabled(0, true)
 		node.connect("on_delete", self, "_on_StartNode_delete")
+		node.connect("focus_entered", self, "_on_graph_node_focus_entered")
+		node.connect("focus_exited", self, "_on_graph_node_focus_exited")
 		start_node = node
 	if set_to_defaults:
 		_set_new_node_params(node, pos, _is_start_node)
-		
+	if not from_empty_to_node.empty():
+		graph_edit.connect_node(node.name, 0, from_empty_to_node, slot_to_connect)
+		from_empty_to_node = ""
+	elif not from_node_to_empty.empty():
+		graph_edit.connect_node(from_node_to_empty, slot_to_connect, node.name, 0)
+		from_node_to_empty = ""
+	slot_to_connect = -1
+	
 	return node
 
 
@@ -60,7 +105,9 @@ func _set_new_node_params(node : GraphNode, pos : Vector2, _is_start_node := fal
 	else:
 		max_id += 1
 		node.id = max_id
-	node.offset = graph_edit.scroll_offset + pos
+	var real_size = graph_edit.rect_size / graph_edit.zoom
+	var offset = graph_edit.scroll_offset
+	node.offset = (pos + graph_edit.scroll_offset) / graph_edit.zoom
 	initial_pos = node.offset
 
 
@@ -269,3 +316,15 @@ func _on_MousePopup_id_pressed(id:int):
 
 func _on_StartNode_delete():
 	$MousePopup.set_item_disabled(0, false)
+
+
+func _on_GraphEdit_connection_from_empty(to, to_slot, release_position):
+	from_empty_to_node = to
+	slot_to_connect = to_slot
+	_call_mouse_popup()
+
+
+func _on_GraphEdit_connection_to_empty(from, from_slot, release_position):
+	from_node_to_empty = from
+	slot_to_connect = from_slot
+	_call_mouse_popup()

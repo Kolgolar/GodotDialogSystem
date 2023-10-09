@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Assets/GreenTheme.tres" type="Theme" id=2]
 [ext_resource path="res://DialoguesSearcher.gd" type="Script" id=3]
 [ext_resource path="res://SaveAs.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Clean.tres" type="DynamicFont" id=5]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -16,6 +17,10 @@ _mouse_popup = NodePath("MousePopup")
 anchor_right = 1.0
 anchor_bottom = 1.0
 right_disconnects = true
+zoom_min = 0.1
+zoom_max = 2.0
+zoom_step = 1.05
+show_zoom_label = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -190,7 +195,7 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -48.0
+margin_bottom = -43.0
 
 [node name="LineEdit" type="LineEdit" parent="ConfirmationDialog/VBoxContainer"]
 margin_right = 494.0
@@ -230,12 +235,29 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -48.0
+margin_bottom = -43.0
 text = "Произошла залупа. Чекай логи."
 
+[node name="V" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="V"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -221.0
+margin_top = 11.0
+margin_right = -23.0
+margin_bottom = 32.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 5 )
+text = "Godot Dialogs Editor BETA"
+
+[connection signal="connection_from_empty" from="GraphEdit" to="." method="_on_GraphEdit_connection_from_empty"]
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_GraphEdit_connection_request"]
+[connection signal="connection_to_empty" from="GraphEdit" to="." method="_on_GraphEdit_connection_to_empty"]
 [connection signal="disconnection_request" from="GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]
 [connection signal="gui_input" from="GraphEdit" to="." method="_on_GraphEdit_gui_input"]
+[connection signal="node_selected" from="GraphEdit" to="." method="_on_GraphEdit_node_selected"]
+[connection signal="node_unselected" from="GraphEdit" to="." method="_on_GraphEdit_node_unselected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OpenNew" to="." method="_on_OpenNew_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveAs" to="." method="_on_SaveAs_pressed"]

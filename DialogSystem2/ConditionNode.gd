@@ -1,6 +1,6 @@
 extends DefaultNode
 
-export(NodePath) onready var condition_var = get_node(condition_var) as LineEdit
+onready var condition_var = $ConditionVar/ConditionVar
 
 const TRUE_PORT_ID = 0
 const FALSE_PORT_ID = 1

@@ -2,11 +2,11 @@ extends DefaultNode
 
 class_name LineNode
 
-export(NodePath) onready var text = get_node(text) as TextEdit
-export(NodePath) onready var localization_id = get_node(localization_id) as LineEdit
-export(NodePath) onready var choice_name = get_node(choice_name) as LineEdit
-export(NodePath) onready var custom_char_name = get_node(custom_char_name) as LineEdit
-export(NodePath) onready var character_drop = get_node(character_drop) as OptionButton
+onready var text = $HBoxContainer/MainColumn/Text/Text
+onready var localization_id = $HBoxContainer/MainColumn/Title/LocalizationLine
+onready var choice_name = $HBoxContainer/MainColumn/Choice/ChoiceName
+onready var custom_char_name = $HBoxContainer/MainColumn/Character/CustomCharName
+onready var character_drop = $HBoxContainer/MainColumn/Character/CharacterDrop
 
 var characters = [
 	"Player",

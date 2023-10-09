@@ -2,8 +2,8 @@ extends DefaultNode
 
 class_name SetterNode
 
-export(NodePath) onready var var_name = get_node(var_name) as LineEdit
-export(NodePath) onready var var_value = get_node(var_value) as LineEdit
+onready var var_name = $HBoxContainer/MainColumn/Var/Var
+onready var var_value = $HBoxContainer/MainColumn/Value/Value
 
 
 func _ready():

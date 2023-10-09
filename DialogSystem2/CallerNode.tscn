@@ -4,6 +4,8 @@
 [ext_resource path="res://CallerNode.gd" type="Script" id=2]
 
 [node name="CallerNode" instance=ExtResource( 1 )]
+margin_bottom = 185.0
+title = "CALLER"
 script = ExtResource( 2 )
 
 [node name="Label" parent="HBoxContainer/MainColumn/Var" index="0"]
